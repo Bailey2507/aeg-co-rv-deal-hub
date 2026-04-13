@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEG Property Walk Inspection Checklist — April 25-26</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#060B14; font-family:'Segoe UI',system-ui,sans-serif; color:#F0EDE6; padding:40px 20px; }
+.container { max-width:900px; margin:0 auto; }
+.badge { display:inline-block; background:#C9A84C22; border:1px solid #C9A84C55; color:#C9A84C; font-size:10px; letter-spacing:3px; font-weight:700; padding:4px 12px; border-radius:4px; margin-bottom:16px; }
+h1 { font-family:Georgia,serif; font-size:26px; margin-bottom:6px; }
+.sub { color:#8A8D93; font-size:13px; margin-bottom:24px; }
+.controls { display:flex; gap:10px; margin-bottom:24px; flex-wrap:wrap; align-items:center; }
+.btn { background:#131B2E; border:1px solid #1E2D45; color:#8A8D93; font-size:12px; padding:7px 16px; border-radius:6px; cursor:pointer; transition:all 0.2s; }
+.btn:hover,.btn.active { background:#C9A84C22; border-color:#C9A84C; color:#C9A84C; }
+.btn.critical-btn.active { background:#E74C3C22; border-color:#E74C3C; color:#E74C3C; }
+.stats { display:flex; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+.stat { background:#0C1220; border:1px solid #131B2E; border-radius:8px; padding:10px 16px; text-align:center; flex:1; min-width:80px; }
+.stat-val { font-size:20px; font-weight:700; color:#C9A84C; }
+.stat-lbl { font-size:10px; color:#8A8D93; margin-top:2px; }
+.progress-bar { background:#131B2E; border-radius:4px; height:5px; margin-bottom:24px; }
+.progress-fill { background:linear-gradient(90deg,#C9A84C,#2ECC71); border-radius:4px; height:5px; width:0%; transition:width 0.4s; }
+.section { background:#0C1220; border:1px solid #131B2E; border-radius:10px; padding:20px; margin-bottom:14px; }
+.section-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; cursor:pointer; }
+.section-title { font-size:12px; font-weight:700; color:#C9A84C; letter-spacing:2px; text-transform:uppercase; }
+.section-count { font-size:11px; color:#8A8D93; }
+.item { display:flex; align-items:flex-start; gap:12px; padding:9px 0; border-bottom:1px solid #131B2E22; }
+.item:last-child { border-bottom:none; }
+.item.hidden { display:none; }
+.cb { width:18px; height:18px; border:2px solid #444; border-radius:4px; flex-shrink:0; cursor:pointer; margin-top:2px; display:flex; align-items:center; justify-content:center; transition:all 0.15s; }
+.cb:hover { border-color:#C9A84C; }
+.cb.checked { background:#2ECC71; border-color:#2ECC71; }
+.cb.checked::after { content:'\2713'; color:#060B14; font-size:11px; font-weight:900; }
+.item-content { flex:1; }
+.item-text { font-size:13px; line-height:1.4; }
+.item-note { font-size:11px; color:#8A8D93; margin-top:3px; }
+.tag { display:inline-block; font-size:9px; padding:2px 7px; border-radius:3px; margin-right:4px; font-weight:700; letter-spacing:0.5px; vertical-align:middle; }
+.tag-critical { background:#E74C3C22; color:#E74C3C; border:1px solid #E74C3C44; }
+.tag-photo { background:#3498DB22; color:#3498DB; border:1px solid #3498DB44; }
+.tag-measure { background:#9B59B622; color:#9B59B6; border:1px solid #9B59B644; }
+.back { display:inline-block; color:#C9A84C; text-decoration:none; font-size:12px; margin-bottom:24px; }
+.back:hover { color:#F0EDE6; }
+.footer { text-align:center; margin-top:30px; font-size:10px; color:#8B7533; letter-spacing:1px; }
+.prop-toggle { display:flex; gap:8px; margin-bottom:20px; }
+.prop-btn { flex:1; padding:10px; background:#0C1220; border:2px solid #131B2E; border-radius:8px; text-align:center; cursor:pointer; font-size:12px; font-weight:700; color:#8A8D93; transition:all 0.2s; }
+.prop-btn.active { border-color:#C9A84C; color:#C9A84C; background:#C9A84C11; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="index.html">&#8592; Back to Deal Hub</a>
+  <div class="badge">ALAMO EQUITY GROUP</div>
+  <h1>Property Walk Inspection Checklist</h1>
+  <div class="sub">April 25–26, 2026 — Dakota Ridge (Golden) + Spruce Lake (Estes Park)</div>
+
+  <div class="prop-toggle">
+    <div class="prop-btn active" onclick="setProp('both', this)">Both Properties</div>
+    <div class="prop-btn" onclick="setProp('dakota', this)">Dakota Ridge Only</div>
+    <div class="prop-btn" onclick="setProp('spruce', this)">Spruce Lake Only</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="totalCount">0</div><div class="stat-lbl">Total Items</div></div>
+    <div class="stat"><div class="stat-val" id="doneCount" style="color:#2ECC71;">0</div><div class="stat-lbl">Checked</div></div>
+    <div class="stat"><div class="stat-val" id="pctCount">0%</div><div class="stat-lbl">Complete</div></div>
+    <div class="stat"><div class="stat-val" id="critLeft" style="color:#E74C3C;">0</div><div class="stat-lbl">Critical Left</div></div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="controls">
+    <div class="btn active" onclick="setFilter('all', this)">All Items</div>
+    <div class="btn critical-btn" onclick="setFilter('critical', this)">Critical Only</div>
+    <div class="btn" onclick="setFilter('unchecked', this)">Unchecked Only</div>
+    <div class="btn" onclick="setFilter('checked', this)">Checked Only</div>
+  </div>
+
+  <div class="section" data-category="entrance">
+    <div class="section-header">
+      <div class="section-title">1. Entrance &amp; Signage</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Verify operating license/permits posted and current at entrance</div><div class="item-note">Must be transferable to new ownership</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-photo">PHOTO</span>Photograph all entrance signage — condition and branding</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check gate/entry system — type, condition, keypad/RFID</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Confirm registration office condition and hours</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Review posted rules — any tenant issues flagged</div></div></div>
+  </div>
+
+  <div class="section" data-category="pads">
+    <div class="section-header">
+      <div class="section-title">2. Pad &amp; Site Conditions</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-measure">COUNT</span>Physically count and verify all FHU pads — confirm 141 (Dakota) / 110 (Spruce)</div><div class="item-note">Discrepancy = renegotiation leverage</div></div></div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Verify 30A vs 50A split on all pads — count each type</div><div class="item-note">50A commands premium ADR</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-photo">PHOTO</span>Document pad surface condition — gravel, concrete, asphalt</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check levelness of at least 20% of pads — note any major issues</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Identify premium pads (waterfront, view, pull-through) — count</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check picnic table and fire ring inventory</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Note any pads blocked, out of service, or unusable</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-photo">PHOTO</span>Long-term tenant sites — identify and photograph</div><div class="item-note">Month-to-month vs annual contracts</div></div></div>
+  </div>
+
+  <div class="section" data-category="electrical">
+    <div class="section-header">
+      <div class="section-title">3. Electrical Infrastructure</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Inspect main electrical panels — age, condition, capacity</div><div class="item-note">Panels over 20 years = red flag</div></div></div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Test 10 random pedestal hookups — voltage, GFCI function</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-photo">PHOTO</span>Photograph all main panels and distribution boxes</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check for exposed wiring or safety violations at pedestals</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Confirm utility metering — single master or individual meters</div><div class="item-note">Single master = billback opportunity</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Ask about average monthly electric bill — both properties</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check for generator backup — office and common areas</div></div></div>
+  </div>
+
+  <div class="section" data-category="water">
+    <div class="section-header">
+      <div class="section-title">4. Water &amp; Sewer Systems</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Confirm water source — municipal, well, or shared</div></div></div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Confirm sewer — municipal or septic/lagoon</div><div class="item-note">Septic in mountains = major CapEx risk</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check water pressure at 5 random hookups</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect dump station(s) — count, condition, location</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check laundry facilities — coin-op, condition, quantity</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect bathhouse(s) — condition, cleanliness, showers</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Ask about average monthly water + sewer bill</div><div class="item-note">Key data for billback ROI calculation</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-photo">PHOTO</span>Photograph main water shutoffs and pump house</div></div></div>
+  </div>
+
+  <div class="section" data-category="roads">
+    <div class="section-header">
+      <div class="section-title">5. Roads &amp; Common Areas</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect all interior road surfaces — gravel vs paved, conditions</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check road widths — can 40ft+ rigs navigate without obstruction</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect lighting — road lights, common area lighting</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check landscaping — trees, maintenance burden, aesthetics</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect pool/hot tub (if applicable) — condition, permits</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check playground area — safety, condition</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect dog walk / pet areas</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check trash / dumpster locations and capacity</div></div></div>
+  </div>
+
+  <div class="section" data-category="office">
+    <div class="section-header">
+      <div class="section-title">6. Office &amp; Management</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Interview on-site manager — retention willingness, salary</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Review reservation software — what system, contract terms</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Confirm WiFi infrastructure — router locations, speed test</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check office security system — cameras, alarm</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Review maintenance log — recent repairs, deferred items</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Ask about seasonal staffing model — how many, from where</div></div></div>
+  </div>
+
+  <div class="section" data-category="revenue">
+    <div class="section-header">
+      <div class="section-title">7. Revenue &amp; Operations Verification</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Request last 12 months booking reports from PMS</div><div class="item-note">Do NOT rely on seller-provided summaries alone</div></div></div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Confirm actual current occupancy vs. seller-stated</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check OTA listings — RVEZY, Campspot, Hipcamp, Booking.com</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Note any seasonal closure periods</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Review group/event bookings on calendar — forward bookings</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check Google reviews — average rating, recurring complaints</div></div></div>
+  </div>
+
+  <div class="section" data-category="deferred">
+    <div class="section-header">
+      <div class="section-title">8. Deferred Maintenance &amp; CapEx</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item" data-critical="true"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text"><span class="tag tag-critical">CRITICAL</span>Document all deferred maintenance visually — photos required</div><div class="item-note">Build repair escrow request from this list</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Assess road resurfacing needs — gravel grading vs repaving</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Inspect fence lines and perimeter — condition</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check any outbuildings — storage, shop, equipment shed</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Ask about any known upcoming capital needs from seller</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Note any flood, erosion, or drainage concerns</div></div></div>
+  </div>
+
+  <div class="section" data-category="expansion">
+    <div class="section-header">
+      <div class="section-title">9. Expansion &amp; Upside Opportunities</div>
+      <div class="section-count"></div>
+    </div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Walk undeveloped land — identify potential pad additions</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Assess cabin / glamping potential on undeveloped acreage</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Check adjacent parcels — any for sale, any buffer risk</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Identify locations for amenity additions — mini-golf, dog park, etc.</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div class="item-content"><div class="item-text">Note cell signal strength across property — Verizon/AT&amp;T/T-Mobile</div></div></div>
+  </div>
+
+  <div class="footer">AEG — PROPERTY INSPECTION CHECKLIST — APRIL 25-26, 2026 — CONFIDENTIAL</div>
+</div>
+<script>
+let currentFilter = 'all';
+function toggle(el) {
+  el.classList.toggle('checked');
+  updateStats();
+  if (currentFilter !== 'all') applyFilter(currentFilter);
+}
+function updateStats() {
+  const visible = [...document.querySelectorAll('.item')].filter(i => !i.classList.contains('hidden'));
+  const all = visible.length;
+  const done = visible.filter(i => i.querySelector('.cb.checked')).length;
+  const critLeft = [...document.querySelectorAll('.item[data-critical="true"]')].filter(i => !i.classList.contains('hidden') && !i.querySelector('.cb.checked')).length;
+  const pct = all > 0 ? Math.round(done/all*100) : 0;
+  document.getElementById('totalCount').textContent = all;
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('pctCount').textContent = pct + '%';
+  document.getElementById('critLeft').textContent = critLeft;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.controls .btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilter(f);
+}
+function applyFilter(f) {
+  document.querySelectorAll('.item').forEach(item => {
+    item.classList.remove('hidden');
+    if (f === 'critical' && !item.dataset.critical) item.classList.add('hidden');
+    if (f === 'unchecked' && item.querySelector('.cb.checked')) item.classList.add('hidden');
+    if (f === 'checked' && !item.querySelector('.cb.checked')) item.classList.add('hidden');
+  });
+  updateStats();
+}
+function setProp(p, btn) {
+  document.querySelectorAll('.prop-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+}
+updateStats();
+</script>
+</body>
+</html>

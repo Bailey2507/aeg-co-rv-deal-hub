@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEG Master Execution Plan — Colorado RV Portfolio</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#060B14; font-family:'Segoe UI',system-ui,sans-serif; color:#F0EDE6; padding:40px 20px; }
+.container { max-width:900px; margin:0 auto; }
+.badge { display:inline-block; background:#C9A84C22; border:1px solid #C9A84C55; color:#C9A84C; font-size:10px; letter-spacing:3px; font-weight:700; padding:4px 12px; border-radius:4px; margin-bottom:16px; }
+h1 { font-family:Georgia,serif; font-size:26px; margin-bottom:6px; }
+.sub { color:#8A8D93; font-size:13px; margin-bottom:32px; }
+.section { background:#0C1220; border:1px solid #131B2E; border-radius:10px; padding:24px; margin-bottom:16px; }
+.section-title { font-size:13px; font-weight:700; color:#C9A84C; letter-spacing:2px; margin-bottom:16px; text-transform:uppercase; }
+.item { display:flex; align-items:flex-start; gap:12px; padding:10px 0; border-bottom:1px solid #131B2E; }
+.item:last-child { border-bottom:none; }
+.cb { width:18px; height:18px; border:2px solid #C9A84C; border-radius:4px; flex-shrink:0; cursor:pointer; margin-top:2px; display:flex; align-items:center; justify-content:center; }
+.cb.checked { background:#C9A84C; }
+.cb.checked::after { content:'\2713'; color:#060B14; font-size:12px; font-weight:700; }
+.item-text { font-size:14px; line-height:1.5; }
+.item-meta { font-size:11px; color:#8A8D93; margin-top:3px; }
+.tag { display:inline-block; font-size:10px; padding:2px 8px; border-radius:3px; margin-right:4px; font-weight:600; }
+.tag-critical { background:#E74C3C22; color:#E74C3C; border:1px solid #E74C3C44; }
+.tag-legal { background:#3498DB22; color:#3498DB; border:1px solid #3498DB44; }
+.tag-capital { background:#2ECC7122; color:#2ECC71; border:1px solid #2ECC7144; }
+.tag-ops { background:#9B59B622; color:#9B59B6; border:1px solid #9B59B644; }
+.progress-bar { background:#131B2E; border-radius:4px; height:6px; margin-bottom:24px; }
+.progress-fill { background:linear-gradient(90deg,#C9A84C,#2ECC71); border-radius:4px; height:6px; width:0%; transition:width 0.5s; }
+.stats { display:flex; gap:16px; margin-bottom:24px; flex-wrap:wrap; }
+.stat { background:#0C1220; border:1px solid #131B2E; border-radius:8px; padding:12px 20px; text-align:center; flex:1; min-width:100px; }
+.stat-val { font-size:24px; font-weight:700; color:#C9A84C; }
+.stat-lbl { font-size:11px; color:#8A8D93; margin-top:2px; }
+.back { display:inline-block; color:#C9A84C; text-decoration:none; font-size:12px; margin-bottom:24px; }
+.back:hover { color:#F0EDE6; }
+.footer { text-align:center; margin-top:30px; font-size:10px; color:#8B7533; letter-spacing:1px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="index.html">&#8592; Back to Deal Hub</a>
+  <div class="badge">ALAMO EQUITY GROUP</div>
+  <h1>Master Execution Plan</h1>
+  <div class="sub">Dakota Ridge + Spruce Lake — 251 Sites — $21M Colorado RV Portfolio</div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-val" id="totalCount">55</div><div class="stat-lbl">Total Items</div></div>
+    <div class="stat"><div class="stat-val" id="doneCount">0</div><div class="stat-lbl">Completed</div></div>
+    <div class="stat"><div class="stat-val" id="pctCount">0%</div><div class="stat-lbl">Progress</div></div>
+    <div class="stat"><div class="stat-val" style="color:#E74C3C" id="critCount">12</div><div class="stat-lbl">Critical Items</div></div>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+
+  <div class="section">
+    <div class="section-title">Phase 1 — PSA &amp; Legal (Pre-Close)</div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Execute Purchase &amp; Sale Agreement with both sellers</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-legal">LEGAL</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Open escrow with title company — both properties simultaneously</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-legal">LEGAL</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Wire earnest money deposits — confirm refund terms in writing</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-capital">CAPITAL</span> Due: Day 3</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Order T12 financials, rent rolls, utility bills — both properties</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Review all existing leases and pad agreements</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Verify zoning compliance and entitlement status</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm utility ownership structure (who pays water/sewer)</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-ops">OPS</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Commission Phase 1 Environmental Assessment</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Phase 2 — Due Diligence (Weeks 1-4)</div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Complete property walk inspection — April 25-26 (both sites)</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-ops">OPS</span> April 25-26</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Engage RV park specialist inspector for infrastructure review</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Survey all 251 pads — FHU count verification (141 + 110)</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Assess electrical infrastructure — 30A vs 50A hookup split</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-ops">OPS</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Water and sewer system inspection — pressure test, capacity</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Review occupancy history — trailing 24 months both properties</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Verify current ADR against market — comp analysis completed</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm internet/WiFi infrastructure capacity for guests</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 3</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Review all vendor contracts and termination clauses</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Interview on-site manager(s) — retention assessment</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 3</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Phase 3 — Capital Stack (Weeks 2-6)</div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Finalize lender commitment — written term sheet in hand</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 3</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Structure seller carryback — negotiate amount and terms</div><div class="item-meta"><span class="tag tag-capital">CAPITAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm equity partner(s) capital commitments in writing</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 4</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Execute JV operating agreement — AEG + equity partners</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 5</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Verify wire instructions — triple-check with title company</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 6</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm reserves — 6-month operating reserve minimum</div><div class="item-meta"><span class="tag tag-capital">CAPITAL</span> Due: Week 4</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Order appraisal — both properties, certified MAI appraiser</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Phase 4 — 90-Day Turnaround Plan</div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Launch utility billback program — target $180-340K annual NOI add</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-ops">OPS</span> Day 30</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Implement dynamic pricing — RVEZY + Campspot integration</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 14</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Raise ADR toward market — Dakota Ridge +$12, Spruce Lake +$18</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 30</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">List premium pads as nightly — target 15% premium over seasonal</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 14</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Install sub-meters at both properties for utility tracking</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 45</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Launch amenity add-on revenue — firewood, golf carts, add-ons</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 60</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Negotiate group / event bookings for shoulder season</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 60</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Rebrand Spruce Lake — update signage, website, booking profiles</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 45</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Google Maps + OTA profile optimization — photos, descriptions</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 14</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Hire or confirm on-site manager — both properties staffed</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-ops">OPS</span> Day 30</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Install property management software — Campspot or RMS</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 30</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Establish monthly financial reporting cadence — P&amp;L by property</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Day 30</div></div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Phase 5 — Risk Mitigation</div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Bind property + liability insurance — both sites before close</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-legal">LEGAL</span> Before Close</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm flood zone status — FEMA maps for both locations</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Stress test at 85% occupancy + 10% expense increase — DSCR 1.25+</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Identify exit strategy — Year 4 refi or portfolio sale at 8.5 cap</div><div class="item-meta"><span class="tag tag-capital">CAPITAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Negotiate seller holdback / repair escrow for deferred maintenance</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span><span class="tag tag-capital">CAPITAL</span> Due: Week 3</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Establish LLC entity structure for each property — asset protection</div><div class="item-meta"><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Confirm seasonal risk — winter occupancy baseline both markets</div><div class="item-meta"><span class="tag tag-ops">OPS</span> Due: Week 1</div></div></div>
+    <div class="item"><div class="cb" onclick="toggle(this)"></div><div><div class="item-text">Verify permits — RV park operating licenses current and transferable</div><div class="item-meta"><span class="tag tag-critical">CRITICAL</span><span class="tag tag-legal">LEGAL</span> Due: Week 2</div></div></div>
+  </div>
+
+  <div class="footer">AEG — MASTER EXECUTION PLAN — COLORADO RV PORTFOLIO — APRIL 2026 — CONFIDENTIAL</div>
+</div>
+<script>
+function toggle(el) {
+  el.classList.toggle('checked');
+  updateStats();
+}
+function updateStats() {
+  const all = document.querySelectorAll('.cb').length;
+  const done = document.querySelectorAll('.cb.checked').length;
+  const pct = Math.round(done/all*100);
+  document.getElementById('doneCount').textContent = done;
+  document.getElementById('pctCount').textContent = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+updateStats();
+</script>
+</body>
+</html>

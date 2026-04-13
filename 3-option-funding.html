@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AEG 3-Option Deal Funding Framework v3 — Colorado RV Portfolio</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#060B14; font-family:'Segoe UI',system-ui,sans-serif; color:#F0EDE6; padding:40px 20px; }
+.container { max-width:1100px; margin:0 auto; }
+.badge { display:inline-block; background:#C9A84C22; border:1px solid #C9A84C55; color:#C9A84C; font-size:10px; letter-spacing:3px; font-weight:700; padding:4px 12px; border-radius:4px; margin-bottom:16px; }
+h1 { font-family:Georgia,serif; font-size:26px; margin-bottom:6px; }
+.sub { color:#8A8D93; font-size:13px; margin-bottom:32px; }
+.options-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:24px; }
+.option { background:#0C1220; border:2px solid #131B2E; border-radius:12px; padding:24px; transition:border-color 0.2s; cursor:pointer; }
+.option:hover { border-color:#C9A84C44; }
+.option.selected { border-color:#C9A84C; }
+.option-num { font-size:11px; letter-spacing:2px; font-weight:700; margin-bottom:8px; }
+.option-title { font-family:Georgia,serif; font-size:18px; font-weight:700; margin-bottom:4px; }
+.option-price { font-size:28px; font-weight:700; margin:12px 0; }
+.option-dscr { display:inline-block; padding:4px 14px; border-radius:20px; font-size:12px; font-weight:700; margin-bottom:16px; }
+.dscr-green { background:#2ECC7122; color:#2ECC71; border:1px solid #2ECC7144; }
+.dscr-yellow { background:#F39C1222; color:#F39C12; border:1px solid #F39C1244; }
+.dscr-blue { background:#3498DB22; color:#3498DB; border:1px solid #3498DB44; }
+.option-rows { border-top:1px solid #131B2E; padding-top:14px; }
+.row { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid #0F192944; font-size:13px; }
+.row:last-child { border-bottom:none; }
+.row-label { color:#8A8D93; }
+.row-val { font-weight:600; }
+.option-1 .option-num { color:#E74C3C; }
+.option-1 .option-price { color:#E74C3C; }
+.option-1 { border-color:#E74C3C22; }
+.option-1.selected, .option-1:hover { border-color:#E74C3C; }
+.option-2 .option-num { color:#C9A84C; }
+.option-2 .option-price { color:#C9A84C; }
+.option-2 { border-color:#C9A84C22; }
+.option-2.selected, .option-2:hover { border-color:#C9A84C; }
+.option-3 .option-num { color:#2ECC71; }
+.option-3 .option-price { color:#2ECC71; }
+.option-3 { border-color:#2ECC7122; }
+.option-3.selected, .option-3:hover { border-color:#2ECC71; }
+.detail-panel { background:#0C1220; border:1px solid #131B2E; border-radius:10px; padding:24px; margin-bottom:16px; }
+.detail-title { font-size:12px; font-weight:700; color:#C9A84C; letter-spacing:2px; margin-bottom:16px; text-transform:uppercase; }
+.pitch-box { background:#131B2E; border-radius:8px; padding:16px 20px; font-size:13px; line-height:1.7; color:#B0A090; font-style:italic; }
+.pitch-box strong { color:#F0EDE6; font-style:normal; }
+table { width:100%; border-collapse:collapse; font-size:12px; }
+th { text-align:left; padding:9px 12px; background:#0A0F1A; color:#8A8D93; font-size:10px; letter-spacing:1px; }
+td { padding:9px 12px; border-bottom:1px solid #0F1929; }
+tr:last-child td { border-bottom:none; }
+.green { color:#2ECC71; }
+.gold { color:#C9A84C; }
+.red { color:#E74C3C; }
+.blue { color:#3498DB; }
+.back { display:inline-block; color:#C9A84C; text-decoration:none; font-size:12px; margin-bottom:24px; }
+.back:hover { color:#F0EDE6; }
+.footer { text-align:center; margin-top:30px; font-size:10px; color:#8B7533; letter-spacing:1px; }
+.recommend { background:#C9A84C11; border:1px solid #C9A84C33; border-radius:6px; padding:6px 12px; font-size:10px; color:#C9A84C; font-weight:700; letter-spacing:1px; display:inline-block; margin-bottom:10px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="back" href="index.html">&#8592; Back to Deal Hub</a>
+  <div class="badge">ALAMO EQUITY GROUP</div>
+  <h1>3-Option Deal Funding Framework <span style="color:#C9A84C;">v3</span></h1>
+  <div class="sub">Dakota Ridge + Spruce Lake — 251 Sites — Seller Pitch Language &amp; Capital Stack Comparisons</div>
+
+  <div class="options-grid">
+
+    <div class="option option-1" onclick="selectOption(1, this)">
+      <div class="option-num">OPTION 1 — CASH ANCHOR</div>
+      <div class="option-title">Clean Cash Close</div>
+      <div class="option-price">$14M</div>
+      <div class="option-dscr dscr-yellow">DSCR 1.19x</div>
+      <div class="option-rows">
+        <div class="row"><span class="row-label">Offer Price</span><span class="row-val">$14,000,000</span></div>
+        <div class="row"><span class="row-label">Structure</span><span class="row-val">All cash / bank debt</span></div>
+        <div class="row"><span class="row-label">Close Timeline</span><span class="row-val red">30 days</span></div>
+        <div class="row"><span class="row-label">Seller Carryback</span><span class="row-val">None</span></div>
+        <div class="row"><span class="row-label">Down Payment</span><span class="row-val">$2,800,000 (20%)</span></div>
+        <div class="row"><span class="row-label">Annual Debt Service</span><span class="row-val">$965,000</span></div>
+        <div class="row"><span class="row-label">Year 1 Cash Flow</span><span class="row-val gold">$757,000</span></div>
+        <div class="row"><span class="row-label">Seller Benefit</span><span class="row-val green">Certainty + speed</span></div>
+      </div>
+    </div>
+
+    <div class="option option-2 selected" onclick="selectOption(2, this)">
+      <div class="recommend">&#9733; AEG RECOMMENDED</div>
+      <div class="option-num">OPTION 2 — SELLER-FRIENDLY CREATIVE</div>
+      <div class="option-title">Near Ask + Carry</div>
+      <div class="option-price">$18M</div>
+      <div class="option-dscr dscr-green">DSCR 1.31x</div>
+      <div class="option-rows">
+        <div class="row"><span class="row-label">Offer Price</span><span class="row-val">$18,000,000</span></div>
+        <div class="row"><span class="row-label">Structure</span><span class="row-val">Bank + seller carry</span></div>
+        <div class="row"><span class="row-label">Close Timeline</span><span class="row-val gold">45-60 days</span></div>
+        <div class="row"><span class="row-label">Seller Carryback</span><span class="row-val blue">$2,700,000 @ 5%</span></div>
+        <div class="row"><span class="row-label">Bank Loan</span><span class="row-val">$12,600,000 (70%)</span></div>
+        <div class="row"><span class="row-label">Down Payment</span><span class="row-val">$2,700,000 (15%)</span></div>
+        <div class="row"><span class="row-label">Annual Debt Service</span><span class="row-val">$1,127,000</span></div>
+        <div class="row"><span class="row-label">Year 1 Cash Flow</span><span class="row-val gold">$595,000</span></div>
+        <div class="row"><span class="row-label">Seller Benefit</span><span class="row-val green">Higher price + monthly income</span></div>
+      </div>
+    </div>
+
+    <div class="option option-3" onclick="selectOption(3, this)">
+      <div class="option-num">OPTION 3 — AGGRESSIVE CREATIVE FULL ASK</div>
+      <div class="option-title">Full Ask + Max Terms</div>
+      <div class="option-price">$21M</div>
+      <div class="option-dscr dscr-blue">DSCR 1.22x</div>
+      <div class="option-rows">
+        <div class="row"><span class="row-label">Offer Price</span><span class="row-val">$21,000,000</span></div>
+        <div class="row"><span class="row-label">Structure</span><span class="row-val">Bank + large carry + equity</span></div>
+        <div class="row"><span class="row-label">Close Timeline</span><span class="row-val gold">60-75 days</span></div>
+        <div class="row"><span class="row-label">Seller Carryback</span><span class="row-val blue">$4,200,000 @ 4.5% / 10yr</span></div>
+        <div class="row"><span class="row-label">Bank Loan</span><span class="row-val">$14,700,000 (70%)</span></div>
+        <div class="row"><span class="row-label">Down Payment</span><span class="row-val">$2,100,000 (10%)</span></div>
+        <div class="row"><span class="row-label">Annual Debt Service</span><span class="row-val">$1,407,000</span></div>
+        <div class="row"><span class="row-label">Year 1 Cash Flow</span><span class="row-val gold">$315,000</span></div>
+        <div class="row"><span class="row-label">Seller Benefit</span><span class="row-val green">Full price + tax-deferred carry income</span></div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="detail-panel" id="pitchPanel">
+    <div class="detail-title">Seller Pitch Language — Option 2 (Recommended)</div>
+    <div class="pitch-box">
+      <strong>"[Seller name], we want to get you to your number.</strong> At $18M, we're within 14% of your ask, and here's how we get there together. We're proposing a bank loan for the primary financing, and we'd ask you to carry $2.7M at 5% interest — that gives you a <strong>reliable monthly income stream of roughly $11,250/month for 10 years</strong>, which is often more tax-efficient than a lump sum close. You still get a substantial cash payout at closing, certainty of close with an experienced buyer, and a clean exit from operations. <strong>We close in 45-60 days and you walk away with income you can count on.</strong> This structure protects you, pays you more over time, and lets us make the operational improvements that protect the value of the note you're holding."
+    </div>
+  </div>
+
+  <div class="detail-panel">
+    <div class="detail-title">Side-by-Side Comparison</div>
+    <table>
+      <thead>
+        <tr><th>Metric</th><th style="color:#E74C3C;">Option 1 — $14M Cash</th><th style="color:#C9A84C;">Option 2 — $18M Creative &#9733;</th><th style="color:#2ECC71;">Option 3 — $21M Full Ask</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Price</td><td>$14,000,000</td><td><strong>$18,000,000</strong></td><td>$21,000,000</td></tr>
+        <tr><td>Seller Carryback</td><td>None</td><td><strong class="blue">$2,700,000 @ 5%</strong></td><td class="blue">$4,200,000 @ 4.5%</td></tr>
+        <tr><td>Down Payment</td><td>$2,800,000</td><td><strong>$2,700,000</strong></td><td>$2,100,000</td></tr>
+        <tr><td>DSCR (current NOI)</td><td class="gold">1.19x ⚠</td><td><strong class="green">1.31x ✓</strong></td><td class="blue">1.22x ✓</td></tr>
+        <tr><td>DSCR (stressed)</td><td class="red">1.07x ✗</td><td><strong class="green">1.26x ✓</strong></td><td class="gold">1.15x ⚠</td></tr>
+        <tr><td>Year 1 Cash Flow</td><td>$757,000</td><td><strong class="gold">$595,000</strong></td><td class="gold">$315,000</td></tr>
+        <tr><td>Year 2 Cash Flow (stabilized)</td><td class="green">$1,429,000</td><td><strong class="green">$1,267,000</strong></td><td class="gold">$987,000</td></tr>
+        <tr><td>Year 4 Exit (8 cap)</td><td>$29.9M</td><td><strong>$29.9M</strong></td><td>$29.9M</td></tr>
+        <tr><td>Equity Multiple (base)</td><td>3.8x</td><td><strong class="green">2.9x</strong></td><td class="gold">2.4x</td></tr>
+        <tr><td>Seller Motivation Score</td><td class="red">Low (big discount)</td><td><strong class="green">High (near ask + income)</strong></td><td class="green">High (full price)</td></tr>
+        <tr><td>Capital Efficiency</td><td class="green">Highest</td><td><strong class="green">High</strong></td><td class="gold">Moderate</td></tr>
+        <tr><td>AEG Recommendation</td><td>Backup / walk away</td><td><strong style="color:#C9A84C;">&#9733; PRIMARY OFFER</strong></td><td>Counter if Option 2 rejected</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="footer">AEG — 3-OPTION FUNDING FRAMEWORK v3 — COLORADO RV PORTFOLIO — APRIL 2026 — CONFIDENTIAL</div>
+</div>
+<script>
+const pitchMap = {
+  1: {
+    title: 'Seller Pitch Language — Option 1 (Cash Anchor)',
+    text: '"[Seller name], I know $14M is below your ask, and I want to be straight with you — we can close this in <strong>30 days, all cash, no financing contingency, no surprises.</strong> We're buying both properties simultaneously. You'll have a wire confirmation before the end of next month. The discount reflects the operational investment we're making — there's meaningful deferred maintenance and revenue lift we need to fund at close. <strong>But if certainty and speed matter to you, this is the cleanest path to done.</strong> No drama, no re-trades, no bank delays."'
+  },
+  2: {
+    title: 'Seller Pitch Language — Option 2 (Recommended)',
+    text: '"[Seller name], we want to get you to your number. At $18M, we're within 14% of your ask, and here's how we get there together. We're proposing a bank loan for the primary financing, and we'd ask you to carry $2.7M at 5% interest — that gives you a <strong>reliable monthly income stream of roughly $11,250/month for 10 years</strong>, which is often more tax-efficient than a lump sum close. You still get a substantial cash payout at closing, certainty of close with an experienced buyer, and a clean exit from operations. <strong>We close in 45-60 days and you walk away with income you can count on.</strong> This structure protects you, pays you more over time, and lets us make the operational improvements that protect the value of the note you're holding."'
+  },
+  3: {
+    title: 'Seller Pitch Language — Option 3 (Full Ask)',
+    text: '"[Seller name], <strong>we're at your number — $21M.</strong> Here's how we structure it to get both sides to close. We bring $2.1M down at closing, the bank funds the core loan, and we ask you to carry $4.2M at 4.5% — that's <strong>over $15,750/month in guaranteed income for 10 years.</strong> You receive your full asking price, you're secured against the property you know better than anyone, and your note is backed by a $29M+ asset on a stabilization trajectory. <strong>For sellers who want their number AND ongoing income, this is the structure that delivers both.</strong> We close in 60-75 days."'
+  }
+};
+function selectOption(num, el) {
+  document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+  const p = pitchMap[num];
+  document.querySelector('#pitchPanel .detail-title').textContent = p.title;
+  document.querySelector('#pitchPanel .pitch-box').innerHTML = p.text;
+}
+</script>
+</body>
+</html>
